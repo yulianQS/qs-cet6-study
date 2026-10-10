@@ -15,7 +15,7 @@
 
 ## 账号与访问
 
-[Local credential omitted from publication.]
+本地凭据未包含在公开仓库中。独立部署的配置与身份认证要求见 [部署说明](DEPLOYMENT.md)。
 
 ## 记忆规则
 
@@ -52,4 +52,4 @@ npm run db:generate
 
 最终资产：`F:/codex_pro/outputs/cet6-study/public/kitten.png`，使用内置 image_gen 生成并检查。提示词：
 
-> Premium clean soft 3D clay illustration for an English CET-6 study website. A cute small cream-white kitten with soft gray ears, big round eyes and a small pink nose, peeking over an open blank English study book, tiny paws resting at the book edge. A soft sky-blue pencil nearby and one little warm yellow star. Uniform pale blue-white #f2f8fb background, landscape 3:2, centered composition, generous negative space, soft diffused lighting, calm eager-to-learn feeling, restrained mint-green and sky-blue study objects. No sprout, plant, text, lettering, logos or watermark. The title is rendered separately as live HTML.
+> 为六级学习网站生成柔和的三维黏土风格插画：一只奶白色、浅灰耳朵的小猫趴在打开的空白英语书后，旁边放置浅蓝色铅笔和暖黄色小星星。使用浅蓝白色背景、横向 3:2 构图、柔和光线与充足留白；画面不包含文字、标识或水印，标题由网页单独呈现。
