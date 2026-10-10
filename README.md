@@ -1,2 +1,55 @@
-# qs-cet6-study
-QS cet-6: React/TypeScript online vocabulary, spaced review and per-account D1 progress
+# QS cet-6 · 小猫陪你学六级
+
+面向 vivo 手机、Android 平板和 Windows 浏览器的公开联网学习应用；学习进度按 ChatGPT 账号独立保存。
+
+## 已实现
+
+- 打开显示小猫封面，标题为 `QS cet-6`。
+- 运行时联网读取 ECDICT，以 cet6 标签筛选词条；当前验证为 5,407 个。自动云端缓存七天，网络刷新失败时提示并使用旧缓存。词库未连接时保留精选学习卡，显示重试入口，不伪装成功。
+- 主动回忆、反向拼写、语境学习、自评后间隔复习、收藏和个人联想笔记。
+- 100 个带原创例句的精选词条、24 个句式、6 篇原创听读微练习和 4 个写作／翻译任务。练习不是历年真题，不预测或保证考试分数。
+- 学习记录、设置、收藏、笔记和显式保存的练习使用 D1 持久化，并按 Sites 注入的 ChatGPT 用户 ID 隔离。未登录访客只能看到公开入口；登录后每个账号拥有独立进度。切回页面刷新云端记录；乐观版本检查避免不同设备覆盖，操作 ID 防止请求重试重复计数。
+- 客户端临时草稿只在当前页面内保存；切换练习和应用内导航保留文本，离开页面提示未保存。请点击保存以跨设备继续。
+- 使用系统英文语音朗读；语音能力依赖浏览器和设备，不能替代真题音频。当前版本需要联网，不承诺离线功能。
+- 学习记录 JSON 导出；手机和平板响应式界面。提供 Web App Manifest，浏览器支持时可创建快捷入口。
+
+## 账号与访问
+
+[Local credential omitted from publication.]
+
+## 记忆规则
+
+“忘记了”十分钟后重学；“有点难”缩短为一天；顺利回忆按 1、3、7、14、30、60 天递增；“很轻松”可多前进一级。新卡默认每天 15 词、5 句式；到期复习不受新卡上限限制。所有日统计使用北京时间。
+
+这是依据检索练习与分散练习原则设计的简单自适应规则，不是 FSRS、经过拟合的遗忘曲线或已证明最优的个人学习计划。
+
+## 开发
+
+采用脚手架既有的 React、Vinext、Cloudflare Worker、D1、Shadcn 组件。
+
+```powershell
+npm run dev
+npx tsc --noEmit
+npm run build
+npm run db:generate
+```
+
+本地迁移使用 `.openai/local-db.json`，依次对 `.wrangler/state` 应用 `drizzle/*.sql`。部署迁移由 Sites 执行。不要将本地测试数据库或本地缓存打包上传。
+
+## 资料
+
+检索日期：2026-09-07。应用“计划与方法”中提供官方 CET-6 考核内容、2026 下半年考试公告、分数解释，以及 Dunlosky 等（2013）和 Roediger & Karpicke（2006）的研究链接。ECDICT 来源及 MIT 许可保存在 `public/ecdict-license.txt`。
+
+## 验证
+
+- TypeScript 类型检查与生产构建通过。
+- 八项核心测试覆盖间隔边界、忘记后的重学、到期优先、每日额度、北京时间切日、在线新词、非法输入和听写匹配；同时验证所有内置材料字段与答案索引。
+- 已通过实际网络端点取得 5,407 个 ECDICT 词条。
+- 未进行真实 vivo 手机／平板硬件测试，也未进行浏览器 UI 自动化测试。
+- 为支持的浏览器注册 `get_cet6_progress` 和 `start_cet6_review` 两个 WebMCP 工具；当前环境没有已启用的 WebMCP 验证上下文，未声称完成运行时工具验证。
+
+## 封面资产
+
+最终资产：`F:/codex_pro/outputs/cet6-study/public/kitten.png`，使用内置 image_gen 生成并检查。提示词：
+
+> Premium clean soft 3D clay illustration for an English CET-6 study website. A cute small cream-white kitten with soft gray ears, big round eyes and a small pink nose, peeking over an open blank English study book, tiny paws resting at the book edge. A soft sky-blue pencil nearby and one little warm yellow star. Uniform pale blue-white #f2f8fb background, landscape 3:2, centered composition, generous negative space, soft diffused lighting, calm eager-to-learn feeling, restrained mint-green and sky-blue study objects. No sprout, plant, text, lettering, logos or watermark. The title is rendered separately as live HTML.
